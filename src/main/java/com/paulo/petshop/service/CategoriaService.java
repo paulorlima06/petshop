@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.paulo.petshop.domain.Categoria;
 import com.paulo.petshop.repository.CategoriaRepository;
+import com.paulo.petshop.service.exceptions.ObjetoNaoEncontradoException;
 
 @Service
 public class CategoriaService {
@@ -16,7 +17,7 @@ public class CategoriaService {
 	
 	public Categoria find(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow( () -> new ObjetoNaoEncontradoException( "Objeto não encontrado. ID: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 	
 }

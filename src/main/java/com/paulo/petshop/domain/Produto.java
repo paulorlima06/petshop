@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,13 +25,13 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 			joinColumns = @JoinColumn(name = "id_produto"),
 			inverseJoinColumns = @JoinColumn(name = "id_categoria"))
 	
 	private List<Categoria> categorias = new ArrayList<>(); 
-	
 	
 
 	public Produto() {

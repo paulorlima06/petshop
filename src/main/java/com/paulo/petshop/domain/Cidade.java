@@ -1,6 +1,8 @@
 package com.paulo.petshop.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Cidade implements Serializable {
@@ -22,6 +25,9 @@ public class Cidade implements Serializable {
 		@ManyToOne
 		@JoinColumn(name = "id_estado")
 		private Estado estado;
+		
+		@OneToMany(mappedBy = "cidade")
+		private List<Endereco> enderecos = new ArrayList<>();
 		
 		public Estado getEstado() {
 			return estado;
@@ -73,6 +79,14 @@ public class Cidade implements Serializable {
 
 		public void setNome(String nome) {
 			this.nome = nome;
+		}
+
+		public List<Endereco> getEnderecos() {
+			return enderecos;
+		}
+
+		public void setEnderecos(List<Endereco> enderecos) {
+			this.enderecos = enderecos;
 		}
 		
 		
